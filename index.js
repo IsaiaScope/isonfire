@@ -1,54 +1,65 @@
-#!/usr/bin/env node
+// index.js
 
-const axios = require('axios');
-const download = require('download-git-repo');
-const fs = require('fs-extra');
-const { Command } = require('commander');
+const yargs = require('yargs');
 
-const program = new Command();
+// Parse command-line arguments
+const argv = yargs
+    .command('launch-test', 'Launch test.js with 3 arguments using positional arguments', (yargs) => {
+        yargs.positional('arg1', {
+            describe: 'Description of arg1',
+            type: 'string'
+        });
+        yargs.positional('arg2', {
+            describe: 'Description of arg2',
+            type: 'string'
+        });
+        yargs.positional('arg3', {
+            describe: 'Description of arg3',
+            type: 'string'
+        });
+    })
+    .command('launch-test-flag', 'Launch test.js with 3 arguments using flags', (yargs) => {
+        yargs.option('r', {
+            alias: 'arg1',
+            describe: 'Description of arg1',
+            type: 'string'
+        });
+        yargs.option('u', {
+            alias: 'arg2',
+            describe: 'Description of arg2',
+            type: 'string'
+        });
+        yargs.option('f', {
+            alias: 'arg3',
+            describe: 'Description of arg3',
+            type: 'string'
+        });
+    })
+    .help()
+    .argv;
 
-program
-  .version('1.0.0')
-  .description('CLI tool to clone a folder from a GitHub repository.')
-  .option('-u, --user <username>', 'GitHub username')
-  .option('-r, --repo <repository>', 'GitHub repository name')
-  .option('-f, --folder <folder>', 'Folder to clone')
-  .parse(process.argv);
+if (argv._.includes('launch-test')) {
+    // Extract arguments from positional arguments
+    const arg1 = argv.arg1;
+    console.log(`🧊 ~ arg1: `, arg1);
+    const arg2 = argv.arg2;
+    console.log(`🧊 ~ arg2: `, arg2);
+    const arg3 = argv.arg3;
+    console.log(`🧊 ~ arg3: `, arg3);
 
-const { user, repo, folder } = program;
-console.log(`🧊 ~ program: `, user, repo, folder);
+    // Launch test.js with the passed arguments
+    const testProcess = spawn('node', ['test.js', arg1, arg2, arg3]);
 
-if (!user || !repo || !folder) {
-  console.error('Please provide GitHub username, repository name, and folder name.');
-  process.exit(1);
+
+} else if (argv._.includes('launch-test-flag')) {
+    // Extract arguments from flags
+    const arg1 = argv.arg1;
+    console.log(`🧊 ~ arg1: `, arg1);
+    const arg2 = argv.arg2;
+    console.log(`🧊 ~ arg2: `, arg2);
+    const arg3 = argv.arg3;
+    console.log(`🧊 ~ arg3: `, arg3);
+
+  
+
 }
-
-const githubUrl = `https://api.github.com/repos/${user}/${repo}/contents/${folder}`;
-
-axios.get(githubUrl)
-  .then(response => {
-    const files = response.data;
-    const folderPath = `${user}-${repo}-${folder}`;
-    download(`${user}/${repo}`, folderPath, { clone: true }, error => {
-      if (error) {
-        console.error('Error cloning repository:', error);
-        return;
-      }
-      console.log('Repository cloned successfully.');
-      files.forEach(file => {
-        const url = file.download_url;
-        const fileName = file.name;
-        axios.get(url, { responseType: 'arraybuffer' })
-          .then(response => {
-            fs.writeFileSync(`${folderPath}/${fileName}`, response.data);
-          })
-          .catch(error => {
-            console.error('Error downloading file:', error);
-          });
-      });
-    });
-  })
-  .catch(error => {
-    console.error('Error fetching folder contents from GitHub:', error);
-  });
-
