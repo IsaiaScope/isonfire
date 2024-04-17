@@ -1,64 +1,25 @@
-// index.js
+#!/usr/bin/env node
+const fs = require('fs-extra');
+const path = require('path');
+const { exec } = require('child_process');
+const download = require('download-git-repo');
+const { Command } = require('commander');
 
-const yargs = require('yargs');
+const program = new Command();
 
-// Parse command-line arguments
-const argv = yargs
-    .command('launch-test', 'Launch test.js with 3 arguments using positional arguments', (yargs) => {
-        yargs.positional('arg1', {
-            describe: 'Description of arg1',
-            type: 'string'
-        });
-        yargs.positional('arg2', {
-            describe: 'Description of arg2',
-            type: 'string'
-        });
-        yargs.positional('arg3', {
-            describe: 'Description of arg3',
-            type: 'string'
-        });
-    })
-    .command('launch-test-flag', 'Launch test.js with 3 arguments using flags', (yargs) => {
-        yargs.option('r', {
-            alias: 'arg1',
-            describe: 'Description of arg1',
-            type: 'string'
-        });
-        yargs.option('u', {
-            alias: 'arg2',
-            describe: 'Description of arg2',
-            type: 'string'
-        });
-        yargs.option('f', {
-            alias: 'arg3',
-            describe: 'Description of arg3',
-            type: 'string'
-        });
-    })
-    .help()
-    .argv;
-    console.log(`🧊 ~ argv: `, argv);
+program
+  .description('An application for pizza ordering')
+  .option('-f, --folder <folder>', 'Folder to clone')
+  .parse();
 
-if (argv._.includes('launch-test')) {
-    // Extract arguments from positional arguments
-    const arg1 = argv.arg1;
-    console.log(`🧊 ~ arg1: `, arg1);
-    const arg2 = argv.arg2;
-    console.log(`🧊 ~ arg2: `, arg2);
-    const arg3 = argv.arg3;
-    console.log(`🧊 ~ arg3: `, arg3);
+const { folder } = program.opts();
+console.log(`🧊 ~ folder: `, folder);
 
+fs.copy(folder, 'destinationFolder')
+  .then(() => {
+    console.log('Folder copied successfully.');
 
-
-} else if (argv._.includes('launch-test-flag')) {
-    // Extract arguments from flags
-    const arg1 = argv.arg1;
-    console.log(`🧊 ~ arg1: `, arg1);
-    const arg2 = argv.arg2;
-    console.log(`🧊 ~ arg2: `, arg2);
-    const arg3 = argv.arg3;
-    console.log(`🧊 ~ arg3: `, arg3);
-
-  
-
-}
+  })
+  .catch((err) => {
+    console.error('Error copying folder:', err);
+  });
