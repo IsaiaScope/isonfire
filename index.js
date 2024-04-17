@@ -16,7 +16,7 @@ program
   .parse(process.argv);
 
 const { user, repo, folder } = program;
-console.log(`🧊 ~ program: `, program);
+console.log(`🧊 ~ program: `, user, repo, folder);
 
 if (!user || !repo || !folder) {
   console.error('Please provide GitHub username, repository name, and folder name.');
