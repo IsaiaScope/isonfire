@@ -37,6 +37,7 @@ const argv = yargs
     })
     .help()
     .argv;
+    console.log(`🧊 ~ argv: `, argv);
 
 if (argv._.includes('launch-test')) {
     // Extract arguments from positional arguments
