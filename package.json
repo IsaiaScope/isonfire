@@ -1,10 +1,10 @@
 {
   "name": "isonfirecli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Cli to clone code/folder locally",
   "main": "index.js",
   "bin": {
-    "isonfirecli": "./index.js"
+    "copy": "./index.js"
   },
   "scripts": {},
   "keywords": [],

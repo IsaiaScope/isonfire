@@ -15,10 +15,16 @@ program
 const { folder } = program.opts();
 console.log(`🧊 ~ folder: `, folder);
 
-fs.copy(folder, 'destinationFolder')
+const sourceFolder = path.join(require.resolve('isonfirecli'), '..', 'src/types');
+console.log(`🧊 ~ sourceFolder: `, sourceFolder);
+
+// Define the destination folder in your local project directory
+const destinationFolder = path.join(__dirname, 'ffrrrrrrrrrrtFolder');
+
+// Copy the folder
+fs.copy(sourceFolder, destinationFolder)
   .then(() => {
     console.log('Folder copied successfully.');
-
   })
   .catch((err) => {
     console.error('Error copying folder:', err);
