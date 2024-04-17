@@ -47,8 +47,6 @@ if (argv._.includes('launch-test')) {
     const arg3 = argv.arg3;
     console.log(`🧊 ~ arg3: `, arg3);
 
-    // Launch test.js with the passed arguments
-    const testProcess = spawn('node', ['test.js', arg1, arg2, arg3]);
 
 
 } else if (argv._.includes('launch-test-flag')) {
