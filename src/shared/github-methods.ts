@@ -2,7 +2,7 @@ import fs from 'fs';
 import { Octokit } from '@octokit/rest';
 
 const octokit = new Octokit({
-	// auth: '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',
+
 });
 
 type Dir = {

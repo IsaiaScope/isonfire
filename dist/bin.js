@@ -2,12 +2,12 @@
 import { Command as d } from "commander";
 import c from "node:fs";
 import { Octokit as R } from "@octokit/rest";
-const y = {
+const l = {
   OWNER: "IsaiaScope",
   REPO: "isonfireCLI",
   REPO_FOLDER_DATA: "data-on-fire"
 }, f = new R({
-  // auth: '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',
+  auth: "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"
 });
 async function m({ owner: t, repo: r, path: s }) {
   const { data: n } = await f.repos.getContent({
@@ -54,20 +54,20 @@ async function u({ owner: t, repo: r, path: s }, n = 1) {
       }
     }
 }
-const { OWNER: A, REPO: w, REPO_FOLDER_DATA: C } = y, h = new d("copy");
-h.name("copy").description("Copy from GitHub repo, default is data-on-fire folder").argument("[path]", "Directory path to copy").option("-p, --path <path>", "Folder path to copy").action(async (t = C) => {
+const { OWNER: A, REPO: w, REPO_FOLDER_DATA: D } = l, h = new d("copy");
+h.name("copy").description("Copy from GitHub repo, default is data-on-fire folder").argument("[path]", "Directory path to copy").option("-p, --path <path>", "Folder path to copy").action(async (t = D) => {
   await m({ owner: A, repo: w, path: t }).catch(console.error);
 });
-const { OWNER: D, REPO: g, REPO_FOLDER_DATA: F } = y, O = new d("see");
+const { OWNER: g, REPO: C, REPO_FOLDER_DATA: F } = l, O = new d("see");
 O.name("see").description("See all paths from GitHub repository").action(async () => {
-  await u({ owner: D, repo: g, path: F }).catch(
+  await u({ owner: g, repo: C, path: F }).catch(
     console.error
   );
 });
-const l = new d();
-l.version("1.0.10", "-v, --version", "check CLI version").name("isonfirecli").description("Copy from GitHub repository https://github.com/IsaiaScope/isonfireCLI");
-l.addCommand(h).addCommand(O);
-l.parse(process.argv);
+const y = new d();
+y.version("1.0.11", "-v, --version", "check CLI version").name("isonfirecli").description("Copy from GitHub repository https://github.com/IsaiaScope/isonfireCLI");
+y.addCommand(h).addCommand(O);
+y.parse(process.argv);
 export {
-  l as program
+  y as program
 };
