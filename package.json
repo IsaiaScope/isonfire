@@ -16,7 +16,8 @@
 		"reset-cli": "pnpm rm-cli && pnpm link-cli && pnpm list --global",
 		"dev": "tsc -w",
 		"build": "tsc && vite build",
-		"build-watch": "vite build --watch"
+		"build-watch": "vite build --watch",
+		"release": "changeset publish"
 	},
 	"keywords": [],
 	"author": "",

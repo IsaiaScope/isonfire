@@ -25,7 +25,12 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm run build
-      - name: Publish package to npm
-        uses: amalej/npm-package-publisher@v1.0.2
+
+      - name: Publish to npm
+        id: changesets
+        uses: changesets/action@v1
         with:
-          access-token: ${{secrets.NPM_TOKEN}}
+          publish: pnpm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
