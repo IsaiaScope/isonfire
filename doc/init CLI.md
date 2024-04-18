@@ -40,4 +40,5 @@ pnpm add -D rollup-plugin-node-externals
 
 ```bash
 pnpm add -D  @changesets/cli
+npx changeset init
 ```
