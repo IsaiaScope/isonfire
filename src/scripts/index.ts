@@ -10,7 +10,7 @@ const octokit = new Octokit();
 // Define the repository owner, repository name, and folder path
 const owner = 'IsaiaScope'; // Replace with the repository owner's username or organization name
 const repo = 'isonfireCLI'; // Replace with the repository name
-const folderPath = 'src/types'; // Replace with the path to the folder in the repository
+const folderPath = 'data/types'; // Replace with the path to the folder in the repository
 
 // Function to fetch and copy each file from the GitHub repository
 async function fetchAndCopyFiles() {
