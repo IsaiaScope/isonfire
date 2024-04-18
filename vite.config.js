@@ -16,5 +16,6 @@ export default defineConfig({
 	plugins: [nodeExternals()],
 	define: {
 		PKG_VERSION: `"${pkg.version}"`,
+		PKG_NAME: `"${pkg.name}"`,
 	},
 });
