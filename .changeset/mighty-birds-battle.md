@@ -1,0 +1,5 @@
+---
+"isonfirecli": patch
+---
+
+Init Scaffolding

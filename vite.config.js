@@ -1,7 +1,8 @@
 // vite.config.js />
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import { nodeExternals } from 'rollup-plugin-node-externals'
+import { nodeExternals } from 'rollup-plugin-node-externals';
+import pkg from './package.json' assert { type: 'json' };
 
 export default defineConfig({
 	build: {
@@ -12,7 +13,8 @@ export default defineConfig({
 			formats: ['es'],
 		},
 	},
-  plugins: [
-    nodeExternals(),
-  ],
+	plugins: [nodeExternals()],
+	define: {
+		PKG_VERSION: `"${pkg.version}"`,
+	},
 });
