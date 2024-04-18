@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { GITHUB_INFO } from '../../models/github-info.js';
+import { GITHUB_INFO } from '../../types/github-info.js';
 import { cloneDirectory } from '../../shared/github-methods.js';
 
 const { OWNER, REPO, REPO_FOLDER_DATA } = GITHUB_INFO;
@@ -7,14 +7,10 @@ const { OWNER, REPO, REPO_FOLDER_DATA } = GITHUB_INFO;
 export const copy = new Command('copy');
 
 copy
-.name('copy')
-	.description('Copy from GitHub repository')
-	.argument('[directory]', 'Directory to copy')
-	.argument('[owner]', 'Repository owner')
-	.argument('[repo]', 'Repository name')
-	.option('-d, --directory <directory>', 'Folder to copy', REPO_FOLDER_DATA)
-	.option('-o, --owner <owner>', 'Repository owner')
-	.option('-r, --repo <repo>', 'Repository name')
-	.action(async (directory, owner = OWNER, repo = REPO) => {
-		await cloneDirectory({ owner, repo, directory }).catch(console.error);
+	.name('copy')
+	.description('Copy from GitHub repo, default is data-on-fire folder')
+	.argument('[path]', 'Directory path to copy')
+	.option('-p, --path <path>', 'Folder path to copy')
+	.action(async (path = REPO_FOLDER_DATA) => {
+		await cloneDirectory({ owner: OWNER, repo: REPO, path }).catch(console.error);
 	});

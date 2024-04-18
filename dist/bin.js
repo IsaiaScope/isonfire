@@ -1,52 +1,73 @@
 #!/usr/bin/env node
-import { Command as p } from "commander";
-import r from "node:fs";
-import { Octokit as l } from "@octokit/rest";
-const w = {
+import { Command as d } from "commander";
+import c from "node:fs";
+import { Octokit as R } from "@octokit/rest";
+const y = {
   OWNER: "IsaiaScope",
   REPO: "isonfireCLI",
-  REPO_FOLDER_DATA: "data",
-  FOLDER: "types",
-  DESTINATION_FOLDER: "copy-folder"
-}, a = new l({
-  auth: "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"
+  REPO_FOLDER_DATA: "data-on-fire"
+}, f = new R({
+  // auth: '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',
 });
-async function y({
-  owner: o,
-  repo: t,
-  directory: n
-}) {
-  const { data: d } = await a.repos.getContent({
-    owner: o,
-    repo: t,
-    path: n
+async function m({ owner: t, repo: r, path: s }) {
+  const { data: n } = await f.repos.getContent({
+    owner: t,
+    repo: r,
+    path: s
   });
-  for (const m of d) {
-    const { type: c, path: e } = m;
-    if (c === "dir")
-      r.mkdirSync(e, { recursive: !0 }), await y({ owner: o, repo: t, directory: e });
-    else if (c === "file") {
-      const { data: s } = await a.repos.getContent({
-        owner: o,
-        repo: t,
-        path: e
-      }), u = Buffer.from(s.content, "base64").toString("utf-8");
-      if (!r.existsSync(e)) {
-        const R = e.split("/").slice(0, -1).join("/");
-        r.mkdirSync(R, { recursive: !0 });
+  if (Array.isArray(n))
+    for (const i of n) {
+      const { type: a, path: o } = i;
+      if (a === "dir")
+        c.mkdirSync(o, { recursive: !0 }), await m({ owner: t, repo: r, path: o });
+      else if (a === "file") {
+        const { data: e } = await f.repos.getContent({
+          owner: t,
+          repo: r,
+          path: o
+        });
+        if (!("content" in e))
+          return;
+        const p = Buffer.from(e.content, "base64").toString("utf-8");
+        if (!c.existsSync(o)) {
+          const E = o.split("/").slice(0, -1).join("/");
+          c.mkdirSync(E, { recursive: !0 });
+        }
+        c.writeFileSync(e.path, p);
       }
-      r.writeFileSync(s.path, u);
     }
-  }
 }
-const { OWNER: O, REPO: D, REPO_FOLDER_DATA: E } = w, f = new p("copy");
-f.name("copy").description("Copy from GitHub repository").argument("[directory]", "Directory to copy").argument("[owner]", "Repository owner").argument("[repo]", "Repository name").option("-d, --directory <directory>", "Folder to copy", E).option("-o, --owner <owner>", "Repository owner").option("-r, --repo <repo>", "Repository name").action(async (o, t = O, n = D) => {
-  await y({ owner: t, repo: n, directory: o }).catch(console.error);
+async function u({ owner: t, repo: r, path: s }, n = 1) {
+  const { data: i } = await f.repos.getContent({
+    owner: t,
+    repo: r,
+    path: s
+  });
+  if (Array.isArray(i))
+    for (const a of i) {
+      const { type: o, path: e } = a;
+      if (o === "dir") {
+        const p = e.split("/").pop();
+        console.log(
+          `${"  ".repeat(n)} ${p} -> npx isonfirecli copy ${e}`
+        ), await u({ owner: t, repo: r, path: e }, n + 1);
+      }
+    }
+}
+const { OWNER: A, REPO: w, REPO_FOLDER_DATA: C } = y, h = new d("copy");
+h.name("copy").description("Copy from GitHub repo, default is data-on-fire folder").argument("[path]", "Directory path to copy").option("-p, --path <path>", "Folder path to copy").action(async (t = C) => {
+  await m({ owner: A, repo: w, path: t }).catch(console.error);
 });
-const i = new p();
-i.version("1.0.10", "-v, --version", "check CLI version").name("isonfirecli").description("isonfireCLI to copy from GitHub repository");
-i.addCommand(f);
-i.parse(process.argv);
+const { OWNER: D, REPO: g, REPO_FOLDER_DATA: F } = y, O = new d("see");
+O.name("see").description("See all paths from GitHub repository").action(async () => {
+  await u({ owner: D, repo: g, path: F }).catch(
+    console.error
+  );
+});
+const l = new d();
+l.version("1.0.10", "-v, --version", "check CLI version").name("isonfirecli").description("Copy from GitHub repository https://github.com/IsaiaScope/isonfireCLI");
+l.addCommand(h).addCommand(O);
+l.parse(process.argv);
 export {
-  i as program
+  l as program
 };
