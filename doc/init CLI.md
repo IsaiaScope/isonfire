@@ -51,3 +51,6 @@ https://www.reddit.com/r/sveltejs/comments/14o51w3/comment/jqc8jy8/?share_id=D_K
 
 
 https://github.com/settings/tokens
+
+
+https://github.com/devopshint/publish_to_npm_using_github_actions/blob/main/.github/workflows/publish.yml
