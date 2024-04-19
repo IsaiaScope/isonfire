@@ -10,8 +10,11 @@ copy
 	.name('copy')
 	.description('Copy from GitHub repo, default is data-on-fire folder')
 	.argument('[path]', 'Directory path to copy')
-	.option('-p, --path <path>', 'Folder path to copy')
 	.action(async (path = REPO_FOLDER_DATA) => {
-		await cloneDirectory({ owner: OWNER, repo: REPO, path }).catch(console.error);
-		console.log(`${path} Copied`);
+		try {
+			await cloneDirectory({ owner: OWNER, repo: REPO, path });
+			console.log(`${path} Copied`);
+		} catch (error) {
+			console.error(error);
+		}
 	});

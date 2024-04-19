@@ -1,8 +1,11 @@
 import fs from 'fs';
 import { Octokit } from '@octokit/rest';
+import { configOnFire } from './store.js';
 
-const octokit = new Octokit({
+const token = configOnFire.get('token');
 
+export const octokit = new Octokit({
+	...(token && { auth: token }),
 });
 
 type Dir = {
