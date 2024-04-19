@@ -1,6 +1,6 @@
 {
 	"name": "isonfirecli",
-	"version": "1.0.22",
+	"version": "1.0.23",
 	"description": "Cli to clone code/folder locally",
 	"module": "./dist/bin.js",
 	"type": "module",
@@ -18,11 +18,11 @@
 		"build": "tsc && vite build",
 		"build-watch": "vite build --watch",
 		"release": "npm publish --access public",
-		"commit-all": "cmd /C \"set \"VERSION=$(node -pe \\\"require('./package.json').version\\\")\" && git add . && git commit -m \"update to version %VERSION%\" && git push\"",
+		"commit-all": "git add . && git commit -m \"update to version %npm_package_version%\" && git push",
 		"push": "npm version patch --no-git-tag-version && pnpm commit-all",
 		"push-minor": "npm version minor --no-git-tag-version && pnpm commit-all",
 		"push-major": "npm version major --no-git-tag-version && pnpm commit-all",
-		"showVersion": "node -e \"console.log(require('./package.json').version)\""
+		"show-version": "echo %npm_package_version%"
 	},
 	"keywords": [],
 	"author": "",

@@ -54,3 +54,6 @@ https://github.com/settings/tokens
 
 
 https://github.com/devopshint/publish_to_npm_using_github_actions/blob/main/.github/workflows/publish.yml
+
+
+https://stackoverflow.com/questions/48609931/how-can-i-reference-package-version-in-npm-script
