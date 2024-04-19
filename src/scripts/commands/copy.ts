@@ -13,4 +13,5 @@ copy
 	.option('-p, --path <path>', 'Folder path to copy')
 	.action(async (path = REPO_FOLDER_DATA) => {
 		await cloneDirectory({ owner: OWNER, repo: REPO, path }).catch(console.error);
+		console.log(`${path} Copied`);
 	});

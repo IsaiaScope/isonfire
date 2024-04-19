@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@octokit/auth-action':
+        specifier: ^5.1.1
+        version: 5.1.1
       '@octokit/rest':
         specifier: ^20.1.0
         version: 20.1.0
@@ -168,8 +171,16 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@octokit/auth-action@5.1.1':
+    resolution: {integrity: sha512-JE2gbAZcwwVuww88YY7oB97P6eVAPgKZk2US9Uyz+ZUw5ubeRkZqog7G/gUEAjayIFt8s0UX3qNntP1agVcB0g==}
+    engines: {node: '>= 18'}
+
   '@octokit/auth-token@4.0.0':
     resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==}
+    engines: {node: '>= 18'}
+
+  '@octokit/auth-token@5.1.1':
+    resolution: {integrity: sha512-rh3G3wDO8J9wSjfI436JUKzHIxq8NaiL0tVeB2aXmG6p/9859aUOAjA9pmSPNGGZxfwmaJ9ozOJImuNVJdpvbA==}
     engines: {node: '>= 18'}
 
   '@octokit/core@5.2.0':
@@ -475,7 +486,14 @@ snapshots:
   '@esbuild/win32-x64@0.20.2':
     optional: true
 
+  '@octokit/auth-action@5.1.1':
+    dependencies:
+      '@octokit/auth-token': 5.1.1
+      '@octokit/types': 13.4.1
+
   '@octokit/auth-token@4.0.0': {}
+
+  '@octokit/auth-token@5.1.1': {}
 
   '@octokit/core@5.2.0':
     dependencies:

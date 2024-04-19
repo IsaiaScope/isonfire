@@ -1,6 +1,6 @@
 {
 	"name": "isonfirecli",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"description": "Cli to clone code/folder locally",
 	"module": "./dist/bin.js",
 	"type": "module",
@@ -29,6 +29,7 @@
 		"vite": "^5.2.9"
 	},
 	"dependencies": {
+		"@octokit/auth-action": "^5.1.1",
 		"@octokit/rest": "^20.1.0",
 		"commander": "^12.0.0"
 	},
