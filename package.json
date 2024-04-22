@@ -1,11 +1,15 @@
 {
 	"name": "isonfirecli",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "Cli to clone code/folder locally",
 	"module": "./dist/bin.js",
 	"type": "module",
 	"directories": {
 		"doc": "doc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/IsaiaScope/isonfireCLI"
 	},
 	"bin": {
 		"isonfirecli": "dist/bin.js"

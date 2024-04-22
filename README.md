@@ -1,6 +1,6 @@
 # isonfirecli
 
-> CLI tool to clone useful code from my repo https://github.com/IsaiaScope/isonfireCLI
+> CLI tool to clone useful code from my repo
 
 ## Commands
 
