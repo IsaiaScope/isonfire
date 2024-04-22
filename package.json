@@ -1,6 +1,6 @@
 {
 	"name": "isonfirecli",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "Cli to clone code/folder locally",
 	"module": "./dist/bin.js",
 	"type": "module",
@@ -28,7 +28,14 @@
 		"push-minor": "npm version minor --no-git-tag-version && pnpm commit-all",
 		"push-major": "npm version major --no-git-tag-version && pnpm commit-all"
 	},
-	"keywords": [],
+	"keywords": [
+		"copy",
+		"clone",
+		"javascript",
+		"typescript",
+		"ui",
+		"doc"
+	],
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
