@@ -3,12 +3,8 @@ import { resolve as _resolve } from 'path';
 import { execSync } from 'child_process';
 import { createInterface } from 'readline';
 import { platform } from 'os';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = _resolve(__filename, '..');
-
-const packageJsonPath = _resolve(__dirname, 'package.json');
+const packageJsonPath = _resolve(process.cwd(), 'package.json');
 
 function getPackageJson() {
 	const data = readFileSync(packageJsonPath, 'utf8');
