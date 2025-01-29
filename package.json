@@ -2,7 +2,7 @@
 	"name": "isonfirecli",
 	"version": "2.0.14",
 	"description": "Cli to clone code/folder locally",
-	"module": "./dist/bin.cjs",
+	"module": "./dist/bin.js",
 	"type": "module",
 	"directories": {
 		"doc": "doc"
@@ -12,7 +12,7 @@
 		"url": "https://github.com/IsaiaScope/isonfireCLI"
 	},
 	"bin": {
-		"isonfirecli": "dist/bin.cjs"
+		"isonfirecli": "dist/bin.js"
 	},
 	"scripts": {
 		"link-cli": "pnpm link --global",
