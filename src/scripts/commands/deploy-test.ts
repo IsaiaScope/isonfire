@@ -10,8 +10,8 @@ export const deployTest = new Command('deploy-test');
 
 deployTest
   .name('deploy-test')
-  .description('Run the deploy-test-runner.js script')
+  .description('Run the deploy-test.js script')
   .action(() => {
-    const scriptPath = path.resolve(__dirname, 'deploy-test-runner.js');
+    const scriptPath = path.resolve(__dirname, 'deploy-test.js');
     execSync(`node ${scriptPath}`, { stdio: 'inherit' });
   });
