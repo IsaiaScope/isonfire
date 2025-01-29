@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 import { createInterface } from 'readline';
 import { platform } from 'os';
 
-const packageJsonPath = _resolve(__dirname, '../../../package.json');
+const packageJsonPath = _resolve(__dirname, 'package.json');
 
 function getPackageJson() {
 	const data = readFileSync(packageJsonPath, 'utf8');
