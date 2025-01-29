@@ -26,7 +26,7 @@ npx isonfirecli see
 
 ### add
 
-Add personal access token for GitHub API that gonna be sto on your local machine
+Add personal access token for GitHub API that gonna be store on your local machine
 it's need to raise the rate limit of GitHub API from 60 to 5000 requests per hour
 
 - [Create your personal token](https://github.com/settings/tokens)
