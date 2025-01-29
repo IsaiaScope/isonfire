@@ -40,6 +40,23 @@ it's need to raise the rate limit of GitHub API from 60 to 5000 requests per hou
 npx isonfirecli add -t <token>
 ```
 
+### deploy-test
+
+The script initializes the readline interface to read inputs from the user.
+
+- Prompt for branch and commit message
+- Commits the _staged_ changes with the provided commit message using `git commit -m`.
+- Pushes the committed _staged_ changes on current branch
+- Updates development/dev and test Branches:
+- Merges the specified branch into the development/dev branch
+- Merges the development/dev branch into the test branch
+
+#### Usage
+
+```
+npx isonfirecli deploy-test
+```
+
 ## Thanks
 
 This is my fist pack and it's far to be perfect, but _The first love is never forgotten_.

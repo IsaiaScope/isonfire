@@ -7,8 +7,17 @@ import { platform } from 'os';
 const packageJsonPath = _resolve(process.cwd(), 'package.json');
 
 function getPackageJson() {
-	const data = readFileSync(packageJsonPath, 'utf8');
-	return JSON.parse(data);
+	try {
+		const data = readFileSync(packageJsonPath, 'utf8');
+		return JSON.parse(data);
+	} catch (error) {
+		logMessage(
+			'Unable to reach package.json in current directory',
+			'red',
+			'negative'
+		);
+		process.exit(1);
+	}
 }
 
 function updatePackageJson(newVersion) {
@@ -68,14 +77,16 @@ const rl = createInterface({
 
 function askQuestion(query, defaultValue = '') {
 	return new Promise(resolve => {
-		rl.question(`? ${query}`, answer => {
+		rl.question(`❓ ${query}`, answer => {
 			resolve(answer || defaultValue);
 		});
 	});
 }
 
 async function promptAlertsAndInfos() {
-	logMessage('File to commit must be already staged', 'yellow', 'alert');
+	logMessage('Help', 'cyan', 'info');
+
+	logMessage('Files to commit must be already staged', 'yellow', 'alert');
 	const staged = await askQuestion(
 		'Have you already staged the files to commit? Y (default) or N : ',
 		'Y'
