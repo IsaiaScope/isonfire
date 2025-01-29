@@ -1,6 +1,6 @@
 {
 	"name": "isonfirecli",
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"description": "Cli to clone code/folder locally",
 	"module": "./dist/bin.js",
 	"type": "module",
