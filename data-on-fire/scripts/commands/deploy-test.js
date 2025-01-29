@@ -84,7 +84,7 @@ function askQuestion(query, defaultValue = '') {
 }
 
 async function promptAlertsAndInfos() {
-	logMessage('Help', 'cyan', 'info');
+	logMessage('https://github.com/IsaiaScope/isonfireCLI?tab=readme-ov-file#deploy-test', 'cyan', 'info');
 
 	logMessage('Files to commit must be already staged', 'yellow', 'alert');
 	const staged = await askQuestion(
