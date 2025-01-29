@@ -1,20 +1,20 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-const readline = require('readline');
-const os = require('os');
+import { readFileSync, writeFileSync } from 'fs';
+import { resolve as _resolve } from 'path';
+import { execSync } from 'child_process';
+import { createInterface } from 'readline';
+import { platform } from 'os';
 
-const packageJsonPath = path.resolve(__dirname, 'package.json');
+const packageJsonPath = _resolve(__dirname, '../../../package.json');
 
 function getPackageJson() {
-	const data = fs.readFileSync(packageJsonPath, 'utf8');
+	const data = readFileSync(packageJsonPath, 'utf8');
 	return JSON.parse(data);
 }
 
 function updatePackageJson(newVersion) {
 	const packageJson = getPackageJson();
 	packageJson.version = newVersion;
-	fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
+	writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
 }
 
 function incrementVersion(version, type) {
@@ -61,7 +61,7 @@ function logMessage(message, color, type) {
 	console.log(boxLine);
 }
 
-const rl = readline.createInterface({
+const rl = createInterface({
 	input: process.stdin,
 	output: process.stdout,
 });
@@ -142,7 +142,7 @@ async function promptCommitMessageAndPush() {
 		encoding: 'utf8',
 	}).trim();
 
-	if (os.platform() === 'linux') {
+	if (platform() === 'linux') {
 		execSync(`echo ${currentBranch} | clip.exe`);
 	} else {
 		execSync(`echo ${currentBranch} | clip`);
