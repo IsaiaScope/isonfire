@@ -16,7 +16,7 @@ function getPackageJson() {
 			'red',
 			'negative'
 		);
-		process.exit(1);
+		process.exit();
 	}
 }
 
@@ -93,7 +93,7 @@ async function promptAlertsAndInfos() {
 	);
 	if (staged.toLowerCase() !== 'y') {
 		logMessage('Please stage the files and run the script again', 'red', 'negative');
-		process.exit(1);
+		process.exit();
 	}
 }
 
@@ -206,7 +206,7 @@ async function promptCommitMessageAndPush() {
 	}).trim();
 	if (!stagedChanges) {
 		logMessage('No staged changes to commit', 'red', 'negative');
-		process.exit(1);
+		process.exit();
 	}
 
 	execSync(`git commit -m "${message}"`);
@@ -245,7 +245,7 @@ async function updateDevAndTest(branch) {
 			'red',
 			'negative'
 		);
-		process.exit(1);
+		process.exit();
 	}
 
 	rl.close();
